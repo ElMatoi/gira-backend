@@ -115,7 +115,7 @@ export class AuthService{
       });
       const token = this.generateToken(createdUser.id);
 
-      return token;
+      return true;
     
       
       
