@@ -1,0 +1,13 @@
+
+# Ignorar archivos temporales
+*.tmp
+
+# Ignorar archivos de compilación
+*.o
+*.out
+
+# Ignorar directorios generados
+/build/
+/dist/
+/node_modules
+/package-lock.json   
