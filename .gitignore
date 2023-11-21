@@ -11,3 +11,12 @@
 /dist/
 /node_modules
 /package-lock.json   
+mysql/#ib_16384_0.dblwr
+mysql/#ib_16384_1.dblwr
+mysql/ca.pem
+mysql/
+* text=auto
+* text=auto
+dist/
+
+

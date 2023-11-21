@@ -27,14 +27,21 @@ export class UseTeamService {
         relations: ['team'], //printea todos los usuarios con la relacion team-user
       });
     }
-    async showTeamUser(userId:number){
-      return this.userTeamRepository.find({
-        where:{user:{id:userId}},
-        relations:['team']
-
-      })
-
+    async showTeamUser(userId: number) {
+      const userTeams = await this.userTeamRepository.find({
+        where: { user: { id: userId } },
+        relations: ['team'],
+      });
+    
+      // printear solo los datos basicos, como nombre y rol en ese team
+      const result = userTeams.map(userTeam => ({
+        rol: userTeam.rol,
+        teamName: userTeam.team.name,
+      }));
+    
+      return result;
     }
+    
     async removeAllUsersFromTeam(teamId: number): Promise<DeleteResult> {
       // Elimina todos los registros de UserTeam que pertenecen al equipo con el ID especificado.
       return this.userTeamRepository

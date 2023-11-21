@@ -6,12 +6,17 @@ import { AuthService } from "./auth.service";
 import { jwtConstants } from "./jwt.constant";
 import { JwtModule } from "@nestjs/jwt";
 import { UserTeamsModule } from "src/users/userTeam.module";
+import { ProjectsModule } from "src/projects/projects.module";
+import { TeamProjectModule } from "src/projects/teamproject.module";
 
 @Module({
   imports: [
     UsersModule,
     TeamsModule,
     UserTeamsModule,
+    ProjectsModule,
+    TeamProjectModule,
+    
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,

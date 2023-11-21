@@ -6,6 +6,8 @@ import { AuthModule } from './auth/auth.module';
 import * as express from 'express';
 import { TeamsModule } from './users/teams.module';
 import { UserTeamsModule } from './users/userTeam.module';
+import { ProjectsModule } from './projects/projects.module';
+import { TeamProjectModule } from './projects/teamproject.module';
 
 
 
@@ -14,9 +16,10 @@ import { UserTeamsModule } from './users/userTeam.module';
     UsersModule,
     TeamsModule,
     UserTeamsModule,
-  
-    
+    ProjectsModule,
+    TeamProjectModule,
     AuthModule,
+    
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',

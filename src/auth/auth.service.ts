@@ -12,7 +12,10 @@ import {DeleteTeamDto} from "./dto/deleteTeam";
 import { Showteamuserdto } from "./dto/showteamuserdto";
 import { JwtService } from "@nestjs/jwt";
 import { NotFoundException } from '@nestjs/common';
-
+import { CreateProjectDto } from "./dto/createProject.dto";
+import { TeamProjectDto } from "./dto/teamProject.dto";
+import { ProjectService } from "src/projects/projects.service";
+import { ProjectTeamService } from "src/projects/teamproject.services";
 
 @Injectable()
 export class AuthService{
@@ -39,7 +42,7 @@ export class AuthService{
           rol,
         });
         //team.users.push(user);
-        const usersInTeam = await this.userteamService.findUsersByTeamId(team.id);
+       const usersInTeam = await this.userteamService.findUsersByTeamId(team.id);
         return usersInTeam;
      
 
@@ -61,6 +64,8 @@ export class AuthService{
         const userteam=await this.userteamService.showTeamUser(user.id);
         return userteam
       }
+
+      
 
 
       async deleteTeam({name}:DeleteTeamDto){
