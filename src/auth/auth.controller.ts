@@ -8,13 +8,31 @@ import {UpdateTeamUserDto} from "./dto/updateteamuser.dto";
 import {AuthGuard} from "./auth.guard";
 import {DeleteTeamDto} from "./dto/deleteTeam";
 import { Showteamuserdto } from "./dto/showteamuserdto";
-
+import { CreateProjectDto } from "./dto/createProject.dto";
+import { TeamProjectDto } from "./dto/teamProject.dto";
+import { CreateTaskDto } from "./dto/createTask.dto";
 
 @Controller('auth') 
 export class AuthController{
     constructor(
         private readonly authService: AuthService,
     ){}
+
+    @Post('createTask')
+    createTask(
+        @Body()
+        createTask:CreateTaskDto
+    ){
+        return this.authService.createTask(createTask);
+    }
+
+    @Post('createProject')
+    createProject(
+        @Body()
+        createProject: CreateProjectDto,
+    ){
+        return this.authService.createProject(createProject);
+    }
 
     @Post('register')
     register(
@@ -30,6 +48,14 @@ export class AuthController{
         loginDto: LoginDto,
     ){
         return this.authService.login(loginDto);
+    }
+    @Post('AddProjectTeam')
+    addprojectteam(
+        @Body()
+        teamprojectDto: TeamProjectDto,
+
+    ){
+        return this.authService.addProjectTeam(teamprojectDto);
     }
 
     @Post('resetPassword')

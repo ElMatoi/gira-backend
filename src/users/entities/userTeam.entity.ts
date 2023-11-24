@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column,  JoinColumn, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column,  JoinColumn, ManyToOne,ManyToMany } from 'typeorm';
 import { User } from './user.entity';
 import { Team } from './team.entity';
 import { Teamproject } from 'src/projects/entities/teamproject.entity';
@@ -11,16 +11,15 @@ export class UserTeam {
   @Column({ default: 'member' })
   rol: string;
 
-  @ManyToOne(() => User, user => user.userTeams)
+  @ManyToOne(() => User, user => user.userTeams) // user.userTeams
   @JoinColumn({ name: 'userId' })
   user: User;
   
-  @ManyToOne(() => Team, team => team.userTeams)
+  @ManyToOne(() => Team, team => team.userTeams) //
   @JoinColumn({ name: 'teamId' })
   team: Team;
 
-  @ManyToOne(() => Teamproject, tp => tp.userTeams)
-  
+  @ManyToMany(() => Teamproject, teamproject => teamproject.userTeam)
   teamprojects: Teamproject[];
 
   

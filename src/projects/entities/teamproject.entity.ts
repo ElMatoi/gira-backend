@@ -1,6 +1,7 @@
-import { Entity, Column, ManyToMany, PrimaryGeneratedColumn, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToMany, PrimaryGeneratedColumn, JoinColumn, ManyToOne,OneToMany } from 'typeorm';
 import { UserTeam } from 'src/users/entities/userTeam.entity';
 import { Project } from './project.entity';
+import { Task } from 'src/tasks/entities/task.entity';
 
 @Entity()
 export class Teamproject {
@@ -11,18 +12,20 @@ export class Teamproject {
   @Column({ length: 500 })
   description: string;
 
-  @Column({ type: 'date', nullable: true })
-  startDate: Date;
+  @Column({ type: 'varchar', nullable: true })
+  startDate: string;
 
-  @Column({ type: 'date', nullable: true })
-  endDate: Date;
+  @Column({ type: 'varchar', nullable: true })
+  endDate: string;
 
-  @ManyToMany(() => UserTeam, userTeam => userTeam.teamprojects)
+  @ManyToOne(() => UserTeam, userTeam => userTeam.teamprojects)
   @JoinColumn({ name: 'userTeamId' })
-  userTeams: UserTeam[];
+  userTeam: UserTeam;
 
-  @ManyToMany(() => Project, tp => tp.teamprojects)
-  @JoinColumn({ name: 'tpId' })
-  tp: Project[];
+  @ManyToOne(() => Project, project => project.teamprojects)
+  @JoinColumn({ name: 'projectId' })
+  project: Project;
+  @OneToMany(() => Task, task => task.user) // 'user' debe coincidir con el nombre de la propiedad en la entidad de tarea
+    tasks: Task[];
   
 }

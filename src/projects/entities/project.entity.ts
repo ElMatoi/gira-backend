@@ -1,5 +1,6 @@
-import { Column, DeleteDateColumn, Entity, ManyToMany, JoinTable } from 'typeorm';
+import { Column, DeleteDateColumn, Entity, ManyToMany, OneToMany } from 'typeorm';
 import { Teamproject } from './teamproject.entity';
+
 
 
 @Entity()
@@ -9,14 +10,11 @@ export class Project {
 
     @Column({ length: 500 })
     name: string;
-
-  
-   
-    @ManyToMany(() => Teamproject, tp => tp.tp)
-  
+    
+    @ManyToMany(() => Teamproject, teamproject => teamproject.project)
     teamprojects: Teamproject[];
     
-
+    
  
 
 }

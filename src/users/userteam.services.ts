@@ -17,6 +17,7 @@ export class UseTeamService {
     create(CreateUserTeamDto: CreateUserTeamDto) {
       return this.userTeamRepository.save(CreateUserTeamDto);
     }
+    
 
     
     async findUsersByTeamId(teamId: number) {
@@ -27,19 +28,48 @@ export class UseTeamService {
         relations: ['team'], //printea todos los usuarios con la relacion team-user
       });
     }
+    async findOneByUserIdAndTeamId(userId: number, teamId: number): Promise<UserTeam | null> {
+      try {
+        const userTeam = await this.userTeamRepository.findOne({
+          where: { user: { id: userId }, team: { id: teamId } },
+        });
+    
+        return userTeam || null;
+      } catch (error) {
+        // Manejar errores si es necesario
+        console.error("Error en findOneByUserIdAndTeamId:", error);
+        return null;
+      }
+    }
+    
+   
+    
+  
     async showTeamUser(userId: number) {
       const userTeams = await this.userTeamRepository.find({
         where: { user: { id: userId } },
         relations: ['team'],
       });
+      return userTeams;
     
       // printear solo los datos basicos, como nombre y rol en ese team
-      const result = userTeams.map(userTeam => ({
+      /*const result = userTeams.map(userTeam => ({
         rol: userTeam.rol,
         teamName: userTeam.team.name,
-      }));
+      }));*/
     
-      return result;
+      
+    }
+    async catchRolUserInTeam(userId:number){
+      const userTeams = await this.userTeamRepository.find({
+        where: { user: { id: userId } },
+        relations: ['team'],
+      });
+      const resultRol = userTeams.map(userTeam => ({
+        rol: userTeam.rol,
+        
+      }));
+      return resultRol;
     }
     
     async removeAllUsersFromTeam(teamId: number): Promise<DeleteResult> {

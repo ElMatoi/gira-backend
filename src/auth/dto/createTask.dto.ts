@@ -5,12 +5,19 @@ function isValidDateFormat(value: string): boolean {
   return dateRegex.test(value);
 }
 
-export class TeamProjectDto {
- 
-  @IsEmail()
-  emailUser: string;
+export class CreateTaskDto {
+
   @IsString()
-  nameTeam:string;
+  name:string;
+  @IsEmail()
+  emailCharge: string;
+
+  @IsEmail()
+  emailCreator: string;
+
+
+  
+
   @IsString()
   nameProject:string;
 

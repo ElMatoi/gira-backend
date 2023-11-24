@@ -8,6 +8,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { UserTeamsModule } from "src/users/userTeam.module";
 import { ProjectsModule } from "src/projects/projects.module";
 import { TeamProjectModule } from "src/projects/teamproject.module";
+import { TaskModule } from "src/tasks/task.module";
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TeamProjectModule } from "src/projects/teamproject.module";
     UserTeamsModule,
     ProjectsModule,
     TeamProjectModule,
+    TaskModule,
     
     JwtModule.register({
       global: true,
